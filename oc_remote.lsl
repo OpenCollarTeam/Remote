@@ -8,7 +8,12 @@ Copyright ©2020
 
 Aria (Tashia Redrose)
     * December 2020       -       Recreated oc_Remote
-    
+
+Medea Destiny
+    *Aug 2023 - Fixes for issues #1 and #3. Macros (scroll) button now leads to standard
+      restrictions menu where macros/presets are, and restrictions button leads to 
+      advanced menu where individual restrictions are. Wearer is now first on list with 
+      people search.
     
 et al.
 Licensed under the GPLv2. See LICENSE for full details.
@@ -128,11 +133,11 @@ list BTNS = [
     "Stop", "stop", 65536,
     "Hudmenu", "@menu", 131072,
     "Person", "@person", 262144,
-    "Restrictions", "menu Restrictions", 524288,
+    "Restrictions", "menu [advanced]", 524288,
     "Titler", "menu Titler", 1048576,
     "Detach", "menu Detach", 2097152,
     "Maximize", "@show", 4194304,
-    "Macros", "menu Macros", 8388608,
+    "Macros", "menu restrictions", 8388608,
     "Themes", "menu Themes", 16777216,
     "NONE", "@no", 0
 ];
@@ -564,7 +569,7 @@ default
             g_lOptions += llDetectedKey(i);
         }
         if(llListFindList(g_lButtons, [llGetOwner()])==-1){
-            g_lOptions += [llGetOwner()];
+            g_lOptions = [llGetOwner()]+g_lOptions;
         }
         Menu(llGetOwner());
     }
